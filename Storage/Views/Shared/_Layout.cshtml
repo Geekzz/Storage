@@ -34,6 +34,20 @@
                         <input type="text" name="category" class="form-control me-2" placeholder="Search by category" aria-label="Search" />
                         <button type="submit" class="btn btn-outline-primary">Search</button>
                     </form>
+                    <!-- Dropdown menu, should display existing categories -->
+                    <form asp-controller="Products" asp-action="FilterCategory" method="get" class="d-flex p-2">
+                        <select name="category" class="form-control me-2">
+                            <option value="">All Categories</option>
+                            @{
+                                var categories = ViewData["Categories"] as List<string> ?? new List<string>();
+                                foreach (var category in categories)
+                                {
+                                    <option value="@category">@category</option>
+                                }
+                            }
+                        </select>
+                        <button type="submit" class="btn btn-outline-primary">Filter</button>
+                    </form>
                 </div>
             </div>
         </nav>

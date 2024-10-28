@@ -47,6 +47,7 @@ namespace Storage.Controllers
                 {
                     Id = p.Id,
                     Name = p.Name,
+                    Category = p.Category,
                     Price = p.Price,
                     Count = p.Count,
                     InventoryValue = p.Price * p.Count
@@ -59,8 +60,11 @@ namespace Storage.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
+            //await DisplayCategories(); 
+            ViewData["Categories"] = _context.Product.Select(c => c.Category).ToList();
             return View(await _context.Product.ToListAsync());
         }
+
 
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
